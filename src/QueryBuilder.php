@@ -250,7 +250,10 @@ class QueryBuilder
         $look = [];
 
         foreach ($columns as $column) {
-            $look[] = $this->columnFilter($column, new FilterHelper($query, $column, $this->db));
+            $filter = $this->columnFilter($column, new FilterHelper($query, $column, $this->db));
+            if ($filter!=='') {
+                $look[] = $filter;
+            }
         }
 
         return implode(' AND ', $look);
